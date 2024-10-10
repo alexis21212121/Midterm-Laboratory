@@ -1,0 +1,43 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+
+
+<section id="about" class="about mt-5"> 
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+            <h2>About Us</h2>
+            <h3>Learn More About <span>Forbes Club!</span></h3>
+        </div>
+
+        <div class="row gy-4 align-items-center">
+          <div class="col-lg-7 position-relative about-bg order-lg-1 order-1" 
+               data-aos="fade-up" data-aos-delay="150">
+
+          </div>
+      
+          <div class="col-lg-5 order-lg-2 order-2" data-aos="fade-up" data-aos-delay="300">
+              <div class="content ps-0 ps-lg-5">
+                  <p class="fst-italic">
+                      D Clothing, a clothing brand established in 2024, seamlessly blends elegant sophistication
+                      with contemporary street style for today's fashion-forward individuals.
+                  </p>
+                  <ul>
+                      <li><i class="bi bi-check2-all"></i> Authentic Tags</li>
+                      <li><i class="bi bi-check2-all"></i> RFID Chips</li>
+                      <li><i class="bi bi-check2-all"></i> Embossed Labels</li>
+                  </ul>
+                  <p>
+                      At D Clothing, we assure our customers that every purchase is a valuable investment,
+                      crafted with meticulous attention to detail and the finest quality materials, guaranteeing
+                      elegance, contemporary style, and unparalleled durability.
+                  </p>
+              </div>
+          </div>
+      </div>
+    </div>
+</section>
+{% endblock content %}

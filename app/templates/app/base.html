@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>D Clothing</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon"> 
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+    {% include 'app/nav.html' %}
+    {% block content %}
+    <!-- pages -->
+    {% endblock content %}
+    {% include 'app/footer.html' %}
+</body>
+</html>

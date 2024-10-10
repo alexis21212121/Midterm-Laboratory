@@ -1,0 +1,26 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+<section style="margin-top: 90px;" id="hero" class="hero d-flex align-items-center section-bg">
+  <div class="carousel-container">
+    <div class="carousel-content">
+      <div class="welcome-header">
+        <h2>Welcome to D Clothing</h2>
+        <p>Your destination for stylish and comfortable clothing.</p>
+      </div>
+
+      <div class="carousel-sections">
+        <div class="carousel-item">
+          <img src="{% static 'images/pants.jpg' %}" alt="hoodie">
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'images/JacketHighlight.png' %}" alt="shirt">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,31 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
+<header id="header" class="header fixed-top d-flex align-items-center">
+    <a href="{% url 'home' %}" class="logo d-flex align-items-center me-auto me-lg-0">
+        <h1>D Clothing<span>.</span></h1>
+    </a>
+
+    <div class="logo-search-container">
+        <div class="search-bar d-flex align-items-center mx-3">
+            <input type="text" id="search-input" placeholder="Search...">
+            <button type="button" class="search-btn">
+                <i class="bi bi-search"></i> Search
+            </button>
+        </div>
+    </div>
+
+    <i class="mobile-nav-toggle bi bi-list mobile-nav-show" onclick="toggleNavbar()"></i>
+    <i class="mobile-nav-toggle d-none bi bi-x mobile-nav-hide" onclick="toggleNavbar()"></i>
+
+    <nav id="navbar" class="navbar">
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'signin' %}">SignIn</a></li>
+            <li><a href="{% url 'signup' %}">SignUp</a></li>
+        </ul>
+    </nav>
+</header>
+
+<script src="{% static 'js/nav.js' %}"></script>
