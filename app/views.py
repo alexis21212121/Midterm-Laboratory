@@ -15,3 +15,6 @@ class SignUpPageView(TemplateView):
 
 class ForgotPassPageView(TemplateView):
     template_name = 'app/forgotpass.html'
+
+class ContactPageView(TemplateView):
+    template_name = 'app/contact.html'
