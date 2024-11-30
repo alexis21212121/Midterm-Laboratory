@@ -1,0 +1,31 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/detail.css' %}">
+<div class="product-detail-container">
+    <h1 class="title">Product Details</h1>
+    <table class="product-detail-table">
+        <thead>
+            <tr>
+                <th>NAME</th>
+                <th>PRICE</th>
+                <th>STOCK</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>${{ product.price }}</td>
+                <td>{{ product.stock }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="categories-section">
+        <strong>Categories:</strong>
+        {% for category in product.categories.all %}
+            {{ category.name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </div>
+    <a href="{% url 'menu' %}" class="back-link">Back to product list</a>
+</div>
+{% endblock content %}

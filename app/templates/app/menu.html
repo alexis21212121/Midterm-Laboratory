@@ -1,0 +1,18 @@
+{% extends 'app/base.html' %}
+
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/menu.css' %}">
+<h1 class="title">Product List</h1>
+<div class="product-list">
+    {% for product in products %}
+        <div class="product-item">
+            <h2 class="product-name">
+                <a href="{% url 'product_detail' pk=product.pk %}">{{ product.name }}</a>
+            </h2>
+        </div>
+    {% empty %}
+        <p class="no-products">No products available.</p>
+    {% endfor %}
+</div>
+{% endblock content %}

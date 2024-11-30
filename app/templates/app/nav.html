@@ -22,9 +22,26 @@
         <ul>
             <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'signin' %}">SignIn</a></li>
-            <li><a href="{% url 'signup' %}">SignUp</a></li>
-            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'menu' %}">Menu</a></li>
+            {% if user.is_authenticated %}
+                <li>
+                <!-- Make username a hyperlink -->
+                <a href="{% url 'profile' %}" class="username-link">Welcome, {{ user.username }}</a>
+                </li>
+                <li>
+                    <!-- Logout Form -->
+                    <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-link nav-btn">Logout</button>
+                    </form>
+                </li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            {% else %}
+                <li><a href="{% url 'signin' %}">Sign In</a></li>
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            {% endif %}
+
         </ul>
     </nav>
 </header>
