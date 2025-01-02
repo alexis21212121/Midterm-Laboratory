@@ -14,12 +14,13 @@
                             <p class="error">{{ message }}</p>
                         {% endfor %}
                         <h3>Sign In</h3>
+                    
                         <label for="email">Email</label>
                         <input id="email" name="email" placeholder="Enter your Email" type="email" required>
-                        
+                    
                         <label for="password">Password</label>
                         <input id="password" name="password" placeholder="Enter your Password" type="password" required>
-                        
+                    
                         <div class="flex-row">
                             <div>
                                 <input type="checkbox" id="remember" name="remember">
@@ -27,8 +28,8 @@
                             </div>
                             <a href="{% url 'forgotpass' %}">Forgot Password</a>
                         </div>
-                        
-                        <button type="submit" class="btn btn-primary">Sign In</button>
+                    
+                        <button type="submit" class="button-submit">Sign In</button>
                         <p>Don't have an account? <a href="{% url 'signup' %}">REGISTER</a></p>
                     </form>
                 </div>
