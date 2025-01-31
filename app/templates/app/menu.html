@@ -11,6 +11,19 @@
             <p class="clothing-deals">Check Our <span>Clothing Deals</span></p>
         </div>
 
+        <!-- Search and Sort Controls -->
+        <div class="filter-controls">
+            <input type="text" id="search-box" placeholder="Search product...">
+            <button id="search-btn">Search</button>
+
+            <select id="sort-options">
+                <option value="default">Sort By</option>
+                <option value="name">A-Z</option>
+                <option value="price_low_high">Low to High Price</option>
+                <option value="price_high_low">High to Low Price</option>
+            </select>
+        </div>
+
         <!-- Category Navigation -->
         <ul class="nav category-nav" data-aos="fade-up" data-aos-delay="200">
             {% for category in categories %}
@@ -58,7 +71,7 @@
     </div>
 </section>
 
-<!-- jQuery (Required for AJAX) -->
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script src="{% static 'js/menu.js' %}"></script>

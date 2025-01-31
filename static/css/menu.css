@@ -164,3 +164,61 @@ body {
 h3 {
     text-align: center;
 }
+
+/* Search and Sort Controls Styling */
+.filter-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Search Box */
+#search-box {
+    width: 250px;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+}
+
+#search-box:focus {
+    border-color: #ff5733;
+}
+
+/* Search Button */
+#search-btn {
+    background-color: black;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#search-btn:hover {
+    background-color: white;
+    color: black;
+    border: solid black;
+}
+
+/* Sort Dropdown */
+#sort-options {
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: white;
+    cursor: pointer;
+    transition: border-color 0.3s ease-in-out;
+}
+
+#sort-options:hover, 
+#sort-options:focus {
+    border-color: black;
+}
