@@ -44,6 +44,9 @@
                 {% endif %}
             {% else %}
                 <!-- Non-authenticated User Navbar -->
+                <li><a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+                <li><a href="{% url 'about' %}" class="{% if request.path == '/about/' %}active{% endif %}">About</a></li>
+                <li><a href="{% url 'menu' %}" class="{% if request.path == '/menu/' %}active{% endif %}">Menu</a></li>
                 <li><a href="{% url 'signin' %}" class="{% if request.path == '/signin/' %}active{% endif %}">Sign In</a></li>
                 <li><a href="{% url 'signup' %}" class="{% if request.path == '/signup/' %}active{% endif %}">Sign Up</a></li>
             {% endif %}
