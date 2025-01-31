@@ -1,0 +1,79 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/order.css' %}">
+
+<section id="orders">
+    <div class="container">
+        <h2>Your Orders</h2>
+
+        {% if orders %}
+            <table class="orders-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Total Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                        <tr class="order-row" data-order-id="{{ order.id }}">
+                            <td>#{{ order.id }}</td>
+                            <td>{{ order.date }}</td>
+                            <td class="order-status">{{ order.status }}</td>
+                            <td>₱{{ order.total_price|floatformat:2 }}</td>
+                            <td>
+                                <button class="view-order-btn" data-order-id="{{ order.id }}">View Items</button>
+                                {% if order.status|lower == "pending" %}
+                                    <button class="cancel-order-btn" data-order-id="{{ order.id }}">Cancel</button>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr class="order-details" id="order-{{ order.id }}" style="display: none;">
+                            <td colspan="5">
+                                <table class="order-items-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in order.order_items.all %}
+                                            <tr>
+                                                <td>{{ item.product.name }}</td>
+                                                <td>{{ item.quantity }}</td>
+                                                <td>₱{{ item.price }}</td>
+                                            </tr>
+                                        {% empty %}
+                                            <tr>
+                                                <td colspan="4">No items in this order.</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>You have no orders.</p>
+        {% endif %}
+    </div>
+</section>
+
+<!-- CSRF Token Injection -->
+<script type="text/javascript">
+    var csrfToken = "{{ csrf_token }}";  // Make sure CSRF token is available
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/order.js' %}"></script>
+
+{% endblock %}

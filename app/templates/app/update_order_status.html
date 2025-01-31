@@ -1,0 +1,17 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+<h2>Update Order Status</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <label for="status">Order Status</label>
+    <select name="status">
+        <option value="Pending" {% if order.status == 'Pending' %}selected{% endif %}>Pending</option>
+        <option value="Shipped" {% if order.status == 'Shipped' %}selected{% endif %}>Shipped</option>
+        <option value="Delivered" {% if order.status == 'Delivered' %}selected{% endif %}>Delivered</option>
+    </select>
+    <button type="submit">Update</button>
+</form>
+
+{% endblock %}

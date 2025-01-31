@@ -8,10 +8,6 @@
 
     <div class="logo-search-container">
         <div class="search-bar d-flex align-items-center mx-3">
-            <input type="text" id="search-input" placeholder="Search...">
-            <button type="button" class="search-btn">
-                <i class="bi bi-search"></i> Search
-            </button>
         </div>
     </div>
 
@@ -20,28 +16,37 @@
 
     <nav id="navbar" class="navbar">
         <ul>
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'menu' %}">Menu</a></li>
             {% if user.is_authenticated %}
-                <li>
-                <!-- Make username a hyperlink -->
-                <a href="{% url 'profile' %}" class="username-link">Welcome, {{ user.username }}</a>
-                </li>
-                <li>
-                    <!-- Logout Form -->
-                    <form method="post" action="{% url 'logout' %}" style="display: inline;">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-link nav-btn">Logout</button>
-                    </form>
-                </li>
-                <li><a href="{% url 'contact' %}">Contact</a></li>
+                {% if user.is_staff or user.is_superuser %}
+                    <!-- Admin Navbar -->
+                    <li><a href="{% url 'admin_dashboard' %}" class="{% if request.path == '/admin-dashboard/' %}active{% endif %}">Admin Dashboard</a></li>
+                    <li><a href="{% url 'profile' %}" class="username-link">Welcome, {{ user.username }}</a></li>
+                    <li>
+                        <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link nav-btn">Logout</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <!-- User Navbar -->
+                    <li><a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+                    <li><a href="{% url 'about' %}" class="{% if request.path == '/about/' %}active{% endif %}">About</a></li>
+                    <li><a href="{% url 'menu' %}" class="{% if request.path == '/menu/' %}active{% endif %}">Menu</a></li>
+                    <li><a href="{% url 'profile' %}" class="username-link">Welcome, {{ user.username }}</a></li>
+                    <li>
+                        <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link nav-btn">Logout</button>
+                        </form>
+                    </li>
+                    <li><a href="{% url 'cart' %}">Cart (<span id="cart-count">{{ cart_items.count }}</span>)</a></li>
+                    <li><a href="{% url 'order_tracking' %}" class="{% if request.path == '/order_tracking/' %}active{% endif %}">Status</a></li>
+                {% endif %}
             {% else %}
-                <li><a href="{% url 'signin' %}">Sign In</a></li>
-                <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <!-- Non-authenticated User Navbar -->
+                <li><a href="{% url 'signin' %}" class="{% if request.path == '/signin/' %}active{% endif %}">Sign In</a></li>
+                <li><a href="{% url 'signup' %}" class="{% if request.path == '/signup/' %}active{% endif %}">Sign Up</a></li>
             {% endif %}
-
         </ul>
     </nav>
 </header>

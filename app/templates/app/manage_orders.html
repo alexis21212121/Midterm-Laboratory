@@ -1,0 +1,44 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/manage_orders.css' %}">
+
+<div class="manage-orders">
+    <h2>Manage Orders</h2>
+
+    {% for user in users_with_orders %}
+        {% if user.orders.exists %}  {# ✅ Only display users who have orders #}
+        <div class="user-orders">
+            <h3>{{ user.username }}</h3>
+            <ul>
+                {% for order in user.orders.all %}
+                    <li id="order-{{ order.id }}">
+                        Order #{{ order.id }} - 
+                        <span class="order-status">{{ order.status }}</span>
+                        
+                        <!-- Remove button for each order -->
+                        <form class="remove-order-form" method="post" action="{% url 'remove_order' order.id %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="remove-button">Remove Order</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+            <form method="post" action="{% url 'update_order_status' user.id %}">
+                {% csrf_token %}
+                <select name="status">
+                    <option value="Pending">Pending</option>
+                    <option value="Shipped">Shipped</option>
+                    <option value="Delivered">Delivered</option>
+                </select>
+                <button type="submit" class="update-button">Update All Orders</button>
+            </form>
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<script src="{% static 'js/manage_orders.js' %}"></script>
+
+{% endblock %}

@@ -1,18 +1,66 @@
 {% extends 'app/base.html' %}
-
 {% load static %}
+
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/menu.css' %}">
-<h1 class="title">Product List</h1>
-<div class="product-list">
-    {% for product in products %}
-        <div class="product-item">
-            <h2 class="product-name">
-                <a href="{% url 'product_detail' pk=product.pk %}">{{ product.name }}</a>
-            </h2>
+
+<section id="menu" class="menu">
+    <div class="container" data-aos="fade-up">
+        <div class="section-header">
+            <h2>Hot Deals!</h2>
+            <p class="clothing-deals">Check Our <span>Clothing Deals</span></p>
         </div>
-    {% empty %}
-        <p class="no-products">No products available.</p>
-    {% endfor %}
-</div>
-{% endblock content %}
+
+        <!-- Category Navigation -->
+        <ul class="nav category-nav" data-aos="fade-up" data-aos-delay="200">
+            {% for category in categories %}
+                <li class="nav-item">
+                    <button class="nav-link category-btn {% if forloop.first %} active{% endif %}" 
+                            data-category-id="{{ category.id }}">
+                        {{ category.name }}
+                    </button>
+                </li>
+            {% empty %}
+                <p>No categories available.</p>
+            {% endfor %}
+        </ul>
+
+        <!-- Products Section -->
+        <div class="products-wrapper" id="products-wrapper">
+            {% for category in categories %}
+                <div class="product-list category-{{ category.id }}" {% if not forloop.first %} style="display: none;"{% endif %}>
+                    <div class="products-container">
+                        {% for product in category.products.all %}
+                            <div class="product-item">
+                                <!-- Product Image -->
+                                <div class="product-img">
+                                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                                </div>
+
+                                <!-- Product Name -->
+                                <h2 class="product-name">
+                                    <a href="/product-detail/{{ product.id }}/">{{ product.name }}</a>
+                                </h2>
+
+                                <!-- Product Price -->
+                                <p class="product-price">₱{{ product.price }}</p>
+
+                                <!-- Add to Cart Button -->
+                                <button class="add-to-cart-btn" data-product-id="{{ product.id }}">Add to Cart</button>
+                            </div>
+                        {% empty %}
+                            <p class="no-products">No products available.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- jQuery (Required for AJAX) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="{% static 'js/menu.js' %}"></script>
+
+{% endblock %}

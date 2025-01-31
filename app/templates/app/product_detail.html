@@ -1,9 +1,13 @@
 {% extends 'app/base.html' %}
 {% load static %}
+
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/detail.css' %}">
+
 <div class="product-detail-container">
     <h1 class="title">Product Details</h1>
+
+    <!-- Product details table -->
     <table class="product-detail-table">
         <thead>
             <tr>
@@ -20,12 +24,17 @@
             </tr>
         </tbody>
     </table>
+
+    <!-- Categories section -->
     <div class="categories-section">
         <strong>Categories:</strong>
         {% for category in product.categories.all %}
             {{ category.name }}{% if not forloop.last %}, {% endif %}
         {% endfor %}
     </div>
+
+    <!-- Link back to the product list -->
     <a href="{% url 'menu' %}" class="back-link">Back to product list</a>
 </div>
+
 {% endblock content %}

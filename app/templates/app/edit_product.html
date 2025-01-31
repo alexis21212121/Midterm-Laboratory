@@ -1,0 +1,43 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/edit_product.css' %}">
+
+<div class="edit-product-container">
+    <h2>Edit Product</h2>
+
+    <div class="form-container">
+        <form method="get">
+            <label for="product">Select a Product to Edit:</label>
+            <select name="product" id="product" class="product-dropdown" onchange="window.location.href=this.value">
+                <option value="">-- Select Product --</option>
+                {% for product in products %}
+                    <option value="{% url 'edit_product' pk=product.pk %}" {% if product.pk == selected_product.pk %}selected{% endif %}>
+                        {{ product.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
+
+        {% if selected_product %}
+            <h3>Edit: {{ selected_product.name }}</h3>
+            <div class="form-wrapper">
+                <form method="post" enctype="multipart/form-data" class="product-form">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="submit-button">Update Product</button>
+                </form>
+            
+                <!-- Delete Product Button -->
+                <form method="post" action="{% url 'delete_product' pk=selected_product.pk %}" 
+                      onsubmit="return confirm('Are you sure you want to delete this product?');" class="delete-form">
+                    {% csrf_token %}
+                    <button type="submit" class="delete-button">Delete Product</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

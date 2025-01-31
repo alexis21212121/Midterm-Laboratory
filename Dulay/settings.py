@@ -56,7 +56,7 @@ ROOT_URLCONF = 'Dulay.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -144,3 +144,6 @@ AUTHENTICATION_BACKENDS = [
 
 # Use the email field as the username field
 AUTH_USER_MODEL = 'auth.User'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import UserProfile
+from .models import Product
 
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={"placeholder": "Enter email"}))
@@ -41,3 +42,8 @@ class UserRegistrationForm(UserCreationForm):
                 user_profile.save()
         
         return user
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['name', 'description', 'image', 'price', 'stock', 'categories']

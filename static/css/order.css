@@ -1,0 +1,40 @@
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.orders-table th, .orders-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.order-items-table {
+    width: 100%;
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+
+.order-items-table th, .order-items-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.order-details {
+    background: #f9f9f9;
+}
+
+/* Ensure cancel button is visible and styled */
+.cancel-order-btn {
+    background-color: #f44336; /* Red color */
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.cancel-order-btn:hover {
+    background-color: #e53935;
+}

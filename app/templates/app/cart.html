@@ -1,0 +1,75 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+
+<!-- Main Cart Section -->
+<section id="cart">
+    <div class="container">
+        <!-- Cart Title -->
+        <h2>Your Cart</h2>
+
+        <!-- If cart has items, show the items table -->
+        {% if cart_items %}
+            <form method="post" id="cart-form">
+                {% csrf_token %}
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in cart_items %}
+                            <tr data-item-id="{{ item.id }}">
+                                <td>
+                                    {% if item.product %}
+                                        {{ item.product.name }}
+                                    {% else %}
+                                        No product found
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <input type="number" class="cart-quantity" data-item-id="{{ item.id }}" value="{{ item.quantity }}" min="1">
+                                </td>
+                                <td>
+                                    {% if item.product %}
+                                        ₱{{ item.product.price }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                <td class="cart-item-total">
+                                    ₱{{ item.total_price }}
+                                    
+                                </td>
+                                <td>
+                                    <button type="button" class="remove-from-cart-btn" data-item-id="{{ item.id }}">Remove</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </form>
+            <!-- Cart Total -->
+            <p class="cart-total">Total: ₱<span id="cart-total">{{ total_price }}</span></p>
+            <div class="order-button-container">
+                <button type="button" class="order-btn">Order</button>
+            </div>
+        {% else %}
+            <!-- Case for an empty cart -->
+            <p>Your cart is empty.</p>
+        {% endif %}
+    </div>
+</section>
+
+<!-- JavaScript for Cart Functionality -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/cart.js' %}"></script>
+
+{% endblock %}

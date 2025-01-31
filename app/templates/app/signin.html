@@ -3,38 +3,55 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/signin.css' %}">
+
 <div class="container-center">
     <div class="breadcrumbs">
         <div class="container">
             <div class="row justify-content-center gy-5">
                 <div class="col-lg-5 d-flex flex-column justify-content-center align-items-center">
+                    
                     <form method="post" action="{% url 'signin' %}" class="form">
                         {% csrf_token %}
-                        {% for message in messages %}
-                            <p class="error">{{ message }}</p>
-                        {% endfor %}
+
+                        <!-- ✅ Display Messages (Success/Error) -->
+                        {% if messages %}
+                            <div class="messages">
+                                {% for message in messages %}
+                                    <p class="{{ message.tags }}">{{ message }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
                         <h3>Sign In</h3>
-                    
+
                         <label for="email">Email</label>
                         <input id="email" name="email" placeholder="Enter your Email" type="email" required>
-                    
+
                         <label for="password">Password</label>
                         <input id="password" name="password" placeholder="Enter your Password" type="password" required>
-                    
+
                         <div class="flex-row">
                             <div>
                                 <input type="checkbox" id="remember" name="remember">
                                 <label for="remember">Remember me</label>
                             </div>
-                            <a href="{% url 'forgotpass' %}">Forgot Password</a>
+                            <a href="{% url 'forgotpass' %}">Forgot Password?</a>
                         </div>
-                    
+
                         <button type="submit" class="button-submit">Sign In</button>
+
                         <p>Don't have an account? <a href="{% url 'signup' %}">REGISTER</a></p>
+
+                        <!-- ✅ Admin Redirection Notice -->
+                        {% if request.user.is_staff or request.user.is_superuser %}
+                            <p class="admin-notice">You are logged in as an admin. <a href="{% url 'admin_dashboard' %}">Go to Admin Panel</a></p>
+                        {% endif %}
                     </form>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 {% endblock content %}

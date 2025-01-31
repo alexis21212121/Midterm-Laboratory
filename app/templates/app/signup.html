@@ -12,6 +12,7 @@
                         {% csrf_token %}
                         <h3>Sign Up</h3>
                         {% for field in form %}
+                            {% if field.name != 'address' %} <!-- Skip the address field -->
                             <div class="form-group">
                                 <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                                 <div class="inputForm">
@@ -25,6 +26,7 @@
                                     </div>
                                 {% endif %}
                             </div>
+                            {% endif %}
                         {% endfor %}
                         <button type="submit" class="button-submit">Sign Up</button>
                         <p>Already have an account? <a href="{% url 'signin' %}">Log In</a></p>
